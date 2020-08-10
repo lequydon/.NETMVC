@@ -1,0 +1,197 @@
+﻿@model LiteCommerce.Admin.Models.ProductPaginationResult
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+<div class="box box-primary">
+    @*<div class="box-header with-border">
+            <h3 class="box-title">Quick Example</h3>
+        </div>*@
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" action="~/Product/Index" method="get">
+        <div class="box-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Supplier</label>
+                    @*@Html.DropDownList("SupplierID",
+                    new SelectList(LiteCommerce.BusinessLayers.CatalogBLL.Suppliers_List(1, 100, "")),
+                    "--All Supplier--",
+                    new { @class = "form-control" })*@
+                <select class="form-control" name="SupplierID">
+                    <option value="">--All Supplier--</option>
+                    @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Suppliers_List(1, 100, "",""))
+                    {
+                        if (item.SupplierID == Model.SupplierID)
+                        {
+                            <option value="@item.SupplierID" selected>@item.CompanyName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.SupplierID">@item.CompanyName</option>
+                        }
+                    }
+                </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Category</label>
+                    <select class="form-control" name="CategoryID">
+                        <option value="">--All Category--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Categories_List(""))
+                        {
+                            if (item.CategoryID == Model.CategoryID)
+                            {
+                                <option value="@item.CategoryID" selected>@item.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CategoryID">@item.CategoryName</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" value="@Model.SearchValue" name="searchValue" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info btn-flat">Find</button>
+                </span>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </form>
+</div>
+<form method="post" action="~/Product/Delete">
+    <div class="container-fluid row">
+        <div class="col-md-9">
+            @{ 
+                var pageCount = Model.RowCount / Model.PageSize;
+                if (Model.RowCount % Model.PageSize != 0)
+                {
+                    pageCount++;
+                }
+            }
+            có @Model.RowCount Products. Page @Model.Page/@pageCount
+        </div>
+        <div class="col-md-3" style="text-align:right">
+            <div class="btn-group">
+                <a href="~/Product/Input" class="btn btn-primary">Add product</a>
+                <button type="submit" class="btn btn-danger">Delete product</button>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Hover Data Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                    <div class="col-sm-12">
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width:10px"><input type="checkbox" class="checkboxAll" /></th>
+                                    <th style="width:15px">#</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity Per Unit</th>
+                                    <th>Unit Price</th>
+                                    <th>Descriptions</th>
+                                    <th>Photo Path</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Data)
+                                {
+                                    <tr role="row" class="even">
+                                        <td><input type="checkbox" class="checkboxRow" name="productIDs" value="@item.ProductID" /></td>
+                                        <td>@(++i)</td>
+                                        <td>
+                                            <a >@item.ProductName</a>
+                                        </td>
+                                        <td>@item.QuantityPerUnit</td>
+                                        <td>
+                                            @item.UnitPrice
+                                        </td>
+                                        <td>@item.Descriptions</td>
+                                        <td>
+                                            <img src="@item.PhotoPath" style="width:50px" />
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-default" href="~/Product/Input/@item.ProductID">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div><div class="row">
+                    <div class="col-sm-5">
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                            <ul class="pagination">
+                                <li><a @*href="/Product?page=1"*@>&laquo;</a></li>
+                                @for (int page = 1; page <= Model.pageCount; page++)
+                                {
+                                    <li id="@page"><a href="/Product?page=@page&&searchValue=@Model.SearchValue&&CategoryID=@Model.CategoryID&&SupplierID=@Model.SupplierID">@page</a></li>
+                                }
+
+                                <li><a @*href="/Product?page=@Model.pageCount"*@>&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</form>
+<script>
+    var numFirstPage = 1;
+    var numLastPage = 5;
+    var strSumPage = $(".pagination li:nth-last-child(2)").attr("id");
+    var numSumPage = parseInt(strSumPage);
+    if (numSumPage > 5) {
+        for (var i = 6; i <= numSumPage; i++) {
+            $(".pagination #" + i + " a").css("display", "none");
+        }
+    }
+    $(".pagination li:last-child").click(function () {
+        if (numLastPage < numSumPage && numSumPage > 5) {
+            changePositionPage("Next");
+        }
+    })
+    $(".pagination li:first-child").click(function () {
+        if (numFirstPage > 1 && numSumPage > 5) {
+            changePositionPage("Prev");
+        }
+    })
+    function changePositionPage(strType) {
+        if (strType == "Next") {
+            numLastPage = numLastPage + 1;
+            $(".pagination #" + numLastPage + " a").css("display", "inline");
+            $(".pagination #" + numFirstPage + " a").css("display", "none");
+            numFirstPage++;
+        }
+        if (strType == "Prev") {
+            $(".pagination #" + numLastPage + " a").css("display", "none");
+            numLastPage = numLastPage - 1;
+            numFirstPage--;
+            $(".pagination #" + numFirstPage + " a").css("display", "inline");
+        }
+    }
+        $(".checkboxAll").click(function () {
+        for (i = 0; i < $(".checkboxRow").length; i++) {
+            if ($(".checkboxAll")[0].checked == true)
+                $(".checkboxRow")[i].checked = true;
+            else
+                $(".checkboxRow")[i].checked = false;
+        }
+        //$(".checkboxRow").every(AddCheckbox);
+    })
+</script>

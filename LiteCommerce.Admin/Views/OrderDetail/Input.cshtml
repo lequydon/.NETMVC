@@ -1,0 +1,61 @@
+﻿
+@model LiteCommerce.DomainModels.OrderDetail
+@{
+}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">OrderDetail</h3>
+        <a class="btn btn-primary" href="~/OrderDetail" style="float:right">Back</a>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" action="~/OrderDetail/Input" method="post">
+        <div class="box-body">
+            <input type="text" style="display:none" name="oldProductID" value="@Model.ProductID" />
+            <div class="form-group">
+                <input type="text" style="display:none" name="OrderID" value="@Model.OrderID" />
+                <label for="exampleInputPassword1">Product Name</label>
+                @Html.ValidationMessage("Product", new { @style = "color:red" })
+                <select class="form-control" name="ProductID">
+                    <option value="">--All Product--</option>
+                    @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Products_List(1, 100, "", 0, 0))
+                    {
+                        if (item.ProductID == Model.ProductID)
+                        {
+                            <option value="@item.ProductID" selected>@item.ProductName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.ProductID">@item.ProductName</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Unit Price</label>
+                    @Html.ValidationMessage("UnitPrice", new { @style = "color:red" })
+                    <input type="text" class="form-control" name="UnitPrice" value="@Model.UnitPrice" id="exampleInputPassword1" placeholder="Enter UnitPrice">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Quantity</label>
+                    @Html.ValidationMessage("Quantity", new { @style = "color:red" })
+                    <input type="text" class="form-control" value="@Model.Quantity" name="Quantity" id="exampleInputPassword1" placeholder="Enter Quantity">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Discount</label>
+                    @Html.ValidationMessage("Discount", new { @style = "color:red" })
+                    <input type="text" class="form-control" value="@Model.Discount" name="discountString" id="exampleInputPassword1" placeholder="Enter Discount">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+        @Html.ValidationMessage("",new { @style = "color:red" })
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+            <a href="~/OrderDetail" class="btn btn-danger">Cancel</a>
+        </div>
+    </form>
+</div>
+

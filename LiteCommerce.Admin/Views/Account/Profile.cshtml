@@ -1,0 +1,260 @@
+﻿@model LiteCommerce.DomainModels.UserProfile
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Profile</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body>
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <div class="">
+        <section class="content">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <!-- Profile Image -->
+                    <div class="box box-primary">
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" style="width:50px;height:50px;border-radius:50%" src="@Model.PhotoPath" />
+                            @*<h3 class="profile-username text-center">@Request.Cookies["name"].Value.ToString()</h3>*@
+                            <h3 class="profile-username text-center">@Model.FirstName @Model.LastName</h3>
+
+                            <p class="text-muted text-center">Software Engineer</p>
+
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item">
+                                    <b>Followers</b> <a class="pull-right">1,322</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Following</b> <a class="pull-right">543</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Friends</b> <a class="pull-right">13,287</a>
+                                </li>
+                            </ul>
+
+                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                    <!-- About Me Box -->
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#activity" data-toggle="tab">Profile</a></li>
+                            <li><a href="#settings" data-toggle="tab">Edit profile</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="active tab-pane  profile" id="activity">
+                                <div class="profile__header">
+                                    <h2 class="profile__title">MY PROFILE</h2>
+                                </div>
+                                <div class="profile__main">
+                                    <img class="profile__imagephoto" src="@Model.PhotoPath" />                                    <div class="profile__iconInfo">
+                                        <i class="fa1 fa fa-facebook" aria-hidden="true"></i>
+                                        <i class="fa2 fa fa-envelope" aria-hidden="true"></i>
+                                        <i class="fa3 fa fa-twitter" aria-hidden="true"></i>
+                                        <i class="fa4 fa fa-telegram" aria-hidden="true"></i>
+                                        <i class="fa5 fa fa-address-card-o" aria-hidden="true"></i>
+                                        <i class="fa6 fa fa-phone" aria-hidden="true"></i>
+                                        <i class="fa7 fa fa-globe" aria-hidden="true"></i>
+                                        <i class="fa8 fa fa-link" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="profile__body">
+                                    <div class="Maxim">
+                                        <p> I’m selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can’t handle me at my worst, then you sure as hell don’t deserve me at my best</p>
+                                        <p style="text-align:right; font-weight:bold">Marilyn Monroe</p>
+                                    </div>
+                                    <div class="profile__body--content">
+                                        <h2 class="content--title" style="text-align:center">INFO PROFILE</h2>
+                                        <div class="content--boxFlex">
+                                            <div class="content--right">
+                                                <div>Full Name:</div>
+                                                <div>@Model.FirstName @Model.LastName</div>
+                                                <div>Birth Day:</div>
+                                                <div>@string.Format("{0:yyyy-MM-dd}", Model.BirthDate)</div>
+                                                <div>Hire Day:</div>
+                                                <div>@string.Format("{0:yyyy-MM-dd}", Model.HireDate)</div>
+                                                <div>Email:</div>
+                                                <div>@Model.Email</div>
+                                                <div>Address:</div>
+                                                <div>@Model.Address</div>
+                                            </div>
+                                            <div class="content--left">
+                                                <div>Country:</div>
+                                                <div>@Model.Country</div>
+                                                <div>City:</div>
+                                                <div>@Model.City</div>
+                                                <div>Home Phone:</div>
+                                                <div>@Model.HomePhone</div>
+                                                <div>Title:</div>
+                                                <div>@Model.Title</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="settings">
+                                <form role="form" method="post" action="~/Account/Profile" enctype="multipart/form-data">
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <input type="text" style="display:none" name="GroupName" value="@Model.GroupName" />
+                                            <input type="text" style="display:none" name="EmployeeID" value="@Model.UserID" />
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Last name</label>
+                                                @Html.ValidationMessage("LastName", new { @style = "color:red" })
+                                                <input type="text" class="form-control" value="@Model.LastName" name="LastName" id="exampleInputPassword1" placeholder="Enter Last name">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">First Name</label>
+                                                @Html.ValidationMessage("FirstName", new { @style = "color:red" })
+                                                <input type="text" class="form-control" value="@Model.FirstName" name="FirstName" id="exampleInputPassword1" placeholder="Enter Fist Name">
+                                            </div>
+                                        </div>
+                                        <input type="text" name="EmployeeID" value="@Model.UserID" style="display:none" />
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Title</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" value="@Model.Title" name="Title" placeholder=" Enter Title">
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Birth Date</label>
+                                                @Html.ValidationMessage("BirthDate", new { @style = "color:red" })
+                                                <input type="date" class="form-control" value="@string.Format("{0:yyyy-MM-dd}", Model.BirthDate)" name="BirthDate" id="exampleInputPassword1">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Hire Date</label>
+                                                @Html.ValidationMessage("HireDate", new { @style = "color:red" })
+                                                <input type="date" class="form-control" value="@string.Format("{0:yyyy-MM-dd}", Model.HireDate)" name="HireDate" id="exampleInputPassword1">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Country</label>
+                                                <select class="form-control" name="Country">
+                                                    <option value="">--choose Country--</option>
+                                                    @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Country_List())
+                                                    {
+                                                        if (item.CountryName == Model.Country)
+                                                        {
+                                                            <option value="@item.CountryName" selected>@item.CountryName</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@item.CountryName">@item.CountryName</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">City</label>
+                                                <input type="text" class="form-control" name="City" value="@Model.City" id="exampleInputPassword1" placeholder="Enter City">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Phone</label>
+                                                <input type="text" class="form-control" name="HomePhone" value="@Model.HomePhone" id="exampleInputPassword1" placeholder="Enter Phone">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Email</label>
+                                                @Html.ValidationMessage("Email", new { @style = "color:red" })
+                                                <input type="text" class="form-control" name="Email" value="@Model.Email" id="exampleInputPassword1" placeholder="Enter  Email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Address</label>
+                                            <input type="text" name="Address" value="@Model.Address" class="form-control" />
+                                            @*<input type="text" class="form-control" name="Notes" value="@Model.Notes" id="exampleInputPassword1" placeholder="Enter Note">*@
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Note</label>
+                                            <textarea name="Notes" class="form-control">@Model.Notes</textarea>
+                                            @*<input type="text" class="form-control" name="Notes" value="@Model.Notes" id="exampleInputPassword1" placeholder="Enter Note">*@
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Photo Path</label>
+                                            @Html.ValidationMessage("pathFile", new { @style = "color:red" })
+                                            <input type="file" class="form-control" name="file" value="@Model.PhotoPath">
+                                        </div>
+                                        <div class="form-group" style="display:none">
+                                            @Html.ValidationMessage("Password", new { @style = "color:red" })
+                                            <label for="exampleInputPassword1">Password</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" name="Password" value="@Model.Password" placeholder="Enter Password">
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+
+                                    <div class="box-footer">
+                                        @Html.ValidationMessage("")
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                        <a href="~/Account" class="btn btn-danger">Cancel</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+        </section>
+    </div>
+    <!-- /.content -->
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="~/Themes/AdminLTEbower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Themes/AdminLTEbower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Themes/AdminLTEbower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Themes/AdminLTEdist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Themes/AdminLTEdist/js/demo.js"></script>
+    <link rel="stylesheet" href="~/Styles/ProfileStyle.css" />
+</body>
+</html>
+<script>
+    console.log($(".image__profile").attr("src"));
+    if ($(".my_Profile_img").attr("src") != $(".profile__imagephoto").attr("src")) {
+        $(".my_Profile_img").attr("src", $(".profile__imagephoto").attr("src"));
+        $(".image__profile").attr("src", $(".profile__imagephoto").attr("src"));
+    }
+</script>

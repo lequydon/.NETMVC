@@ -1,0 +1,94 @@
+﻿@model LiteCommerce.DomainModels.Product
+@{
+}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Product</h3>
+        <a class="btn btn-primary" href="~/Product" style="float:right">Back</a>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" method="post" action="~/Product/Input" enctype="multipart/form-data">
+        <div class="box-body">
+            <div class="form-group">
+                <input type="text" style="display:none" name="ProductID" value="@Model.ProductID" />
+                <label for="exampleInputEmail1">Product Name</label>
+                @Html.ValidationMessage("ProductName", new { @style = "color:red" })
+                <input type="text" class="form-control" name="ProductName" value="@Model.ProductName" id="exampleInputEmail1" placeholder="Enter Product name">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Supplier</label>
+                    <select class="form-control" name="SupplierID">
+                        <option value="">--All Supplier--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Suppliers_List(1, 100, "",""))
+                        {
+                            if (item.SupplierID == Model.SupplierID)
+                            {
+                                <option value="@item.SupplierID" selected>@item.CompanyName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.SupplierID">@item.CompanyName</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Category</label>
+                    <select class="form-control" name="CategoryID">
+                        <option value="">--All Category--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Categories_List(""))
+                        {
+                            if (item.CategoryID == Model.CategoryID)
+                            {
+                                <option value="@item.CategoryID" selected>@item.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CategoryID">@item.CategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Quantity Per Unit</label>
+                    <input type="text" class="form-control" name="QuantityPerUnit" value="@Model.QuantityPerUnit" id="exampleInputPassword1" placeholder="Enter Quantity Per Unit">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Unit Price</label>
+                    <input type="text" class="form-control" value="@Model.UnitPrice" name="UnitPrice" id="exampleInputPassword1" placeholder="Enter Unit Price">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Descriptions</label>
+                <textarea name="Descriptions" class="form-control">@Model.Descriptions</textarea>
+                @*<input type="text" class="form-control" name="Notes" value="@Model.Notes" id="exampleInputPassword1" placeholder="Enter Note">*@
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">	Photo Path</label>
+                @Html.ValidationMessage("pathFile", new { @style = "color:red" })
+
+                <input type="file" id="fileImage" class="form-control" name="file" value="@Model.PhotoPath">
+                <img class="imageURL" src="@Model.PhotoPath" style="height: 60px;margin:5px" />
+                <script>
+                    $('#fileImage').change(function (event) {
+                        var tmppath = URL.createObjectURL(event.target.files[0]);
+                        $(".imageURL").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
+                    });
+                </script>
+            </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+            @Html.ValidationMessage("")
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+            <a href="~/Product" class="btn btn-danger">Cancel</a>
+        </div>
+    </form>
+</div>
+

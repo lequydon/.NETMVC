@@ -1,0 +1,110 @@
+﻿.profile__title{
+   color:white;
+   text-align:center;
+   letter-spacing:10px;
+   opacity:0.7;
+   padding-top:10px;
+}
+.profile__header {
+    background-image: url("https://d2r55xnwy6nx47.cloudfront.net/uploads/2018/06/Milkyway_fullwidthLede.jpg");
+    height: 500px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    clip-path: polygon(0 0, 0 70%, 100% 50%, 100% 0);
+}
+.profile__imagephoto{
+    height:230px;
+    width:230px;
+    z-index:100;
+    position:absolute;
+    top:23%;
+    right:0;
+    left:0;
+    margin:0 auto;
+    background-color:white;
+    border-radius:50%;
+    padding:10px;
+}
+.profile__iconInfo {
+    border-radius: 50%;
+    top: 15%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    width: 350px;
+    height: 350px;
+}
+    .profile__iconInfo i {
+        box-shadow: 0px 0px 10px 1px #807b7b;
+        z-index: 100;
+        position: absolute;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+    }
+#activity {
+    position: relative;
+    width: 100%;
+}
+.profile__iconInfo .fa1 {
+    right: 0;
+    left: 0;
+    margin: 0px auto;
+}
+.profile__iconInfo .fa2 {
+    top: 15%;
+    left: 13%;
+}
+.profile__iconInfo .fa3 {
+    top: 15%;
+    right: 13%;
+}
+.profile__iconInfo .fa4 {
+    top: 40%;
+    left: 0;
+}
+.profile__iconInfo .fa5 {
+    top: 40%;
+    right: 0;
+}
+.profile__iconInfo .fa6 {
+    bottom: 15%;
+    right: 13%;
+}
+.profile__iconInfo .fa7 {
+    bottom: 15%;
+    left: 13%;
+}
+.profile__iconInfo .fa8 {
+    right: 0;
+    left: 0;
+    margin: 0px auto;
+    bottom:0;
+}
+.tab-content {
+    background-color: #f9f9f9;
+}
+.profile__body .Maxim {
+    text-align: center;
+    background-color: white;
+}
+.content-wrapper{
+    height:auto;
+}
+.content--boxFlex {
+    width:100%;
+    display: flex;
+    justify-content:space-evenly;
+}
+.content--right, .content--left {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap:20px;
+}

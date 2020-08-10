@@ -1,0 +1,93 @@
+﻿
+@model LiteCommerce.Admin.Models.CategoryPaginationResult
+@{
+    ViewBag.Title = "Category";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<div class="box box-primary">
+    @*<div class="box-header with-border">
+            <h3 class="box-title">Quick Example</h3>
+        </div>*@
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" method="get" action="~/Category">
+        <div class="box-body">
+            <div class="input-group input-group-sm">
+                <input type="text" name="searchValue" value="@Model.SearchValue" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info btn-flat">Find</button>
+                </span>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </form>
+</div>
+<form action="~/Category/Delete" method="post">
+    <div class="container-fluid row">
+        <div class="col-md-9">
+            có @Model.RowCount Categories
+        </div>
+        <div class="col-md-3"style="text-align:right">
+            <div class="btn-group">
+                <a href="~/Category/Input" class="btn btn-primary">Add Category</a>
+                <button type="submit" class="btn btn-danger">Delete Category</button>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Hover Data Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                    <div class="col-sm-12">
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width:10px"><input class="checkboxAll" type="checkbox"/></th>
+                                    <th style="width:15px">#</th>
+                                    <th>Category name</th>
+                                   ' <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Data)
+                                {
+                                    <tr role="row" class="even">
+                                        <td><input class="checkboxRow" type="checkbox" name="categoriesIDs" value="@item.CategoryID"/></td>
+                                        <td>@(++i)</td>
+                                        <td>
+                                            @item.CategoryName
+                                        </td>
+                                        <td>@item.Description</td>
+                                        <td>
+                                            <a class="btn btn-default" href="~/Category/Input/@item.CategoryID">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</form>
+<script>
+    $(".checkboxAll").click(function () {
+        for (i = 0; i < $(".checkboxRow").length; i++) {
+            if ($(".checkboxAll")[0].checked == true)
+                $(".checkboxRow")[i].checked = true;
+            else
+                $(".checkboxRow")[i].checked = false;
+        }
+        //$(".checkboxRow").every(AddCheckbox);
+    })
+</script>

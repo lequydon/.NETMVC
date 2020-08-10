@@ -1,0 +1,160 @@
+﻿@model LiteCommerce.Admin.Models.EmployeePaginationResult
+@{
+    ViewBag.Title = "Employees";
+    var i = 0;
+}
+
+<div class="box box-primary">
+    @*<div class="box-header with-border">
+            <h3 class="box-title">Quick Example</h3>
+        </div>*@
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" method="get" action="~/Employee">
+        @*<div class="form-group">*@
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Country</label>
+                <select class="form-control" name="country">
+                    <option value="">--choose Country--</option>
+                    @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Country_List())
+                    {
+                        @*<option value="@item.CountryName">@item.CountryName</option>*@
+                        if (item.CountryName==Model.Country)
+                        {
+                            <option value="@item.CountryName" selected >@item.CountryName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.CountryName">@item.CountryName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" name="searchValue" value="@Model.SearchValue" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info btn-flat">Find</button>
+                </span>
+            </div>
+        </div>
+            @*</div>*@
+            <!-- /.box-body -->
+</form>
+</div>
+<form method="post" action="~/Employee/Delete">
+    <div class="container-fluid row">
+        <div class="col-md-8">
+            @{
+                var pageCount = Model.RowCount / Model.PageSize;
+                if (Model.RowCount % Model.PageSize != 0)
+                {
+                    pageCount++;
+                }
+            }
+            có @Model.RowCount Employee. Page @Model.Page/@pageCount
+        </div>
+        <div class="col-md-4" style="text-align:right">
+            <div class="btn-group" >
+                <a href="~/Employee/Input" class="btn btn-primary">Add Employees</a>
+                <button type="submit" class="btn btn-danger">Delete Employees</button>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Hover Data Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                    <div class="col-sm-12">
+                        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th style="width:10px"><input type="checkbox" class="checkboxAll" /></th>
+                                    <th style="width:15px">#</th>
+                                    <th>Name</th>
+                                    <th style="width:100px">date</th>
+                                    <th>Contact Info</th>
+                                    <th>Address</th>
+                                    <th>Notes</th>
+                                    <th>PhotoPath</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Data)
+                                {
+                                    <tr role="row" class="even">
+                                        <td><input type="checkbox" class="checkboxRow" name="employeeIDs" value="@item.EmployeeID" /></td>
+                                        <td>@(++i)</td>
+                                        <td>
+                                            <span style="color:blue;font-weight:bold">@item.FirstName @item.LastName</span><br />
+                                            @item.Title
+                                        </td>
+                                        <td>
+                                            <span class="fa fa-birthday-cake">@string.Format("{0:yyyy-MM-dd}", item.BirthDate)</span><br />
+                                            <span class="fa fa-briefcase">@string.Format("{0:yyyy-MM-dd}", item.HireDate)</span>
+                                        </td>
+                                        <td>
+                                            <span class="fa fa-phone" style="display:block">@item.HomePhone</span><br />
+                                            <span class="fa fa-envelope-square" style="display:block">@item.Email</span><br />
+                                        </td>
+                                        <td>
+                                            <span style="color:blue;font-weight:bold">@item.Address</span><br />
+                                            <span>@item.City</span><br />
+                                            <span>@item.Country</span>
+                                        </td>
+                                        <td>
+                                            @item.Notes
+                                        </td>
+                                        <td>
+                                            <img src="@item.PhotoPath" class="image_employee" style="width:50px" />
+                                        </td>
+                                        <td style="display:none">
+                                            @item.Password
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-default" href="~/Employee/Input/@item.EmployeeID">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                            <ul class="pagination">
+                                <li><a @*href="/Customer?page=1"*@>&laquo;</a></li>
+                                @for (int page = 1; page <= Model.pageCount; page++)
+                                {
+                                    <li id="@page"><a href="/Employee?page=@page&&country=@Model.Country&&searchValue=@Model.SearchValue">@page</a></li>
+                                }
+
+                                <li><a @*href="/Customer?page=@Model.pageCount"*@>&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</form>
+<script>
+    $(".checkboxAll").click(function () {
+        for (i = 0; i < $(".checkboxRow").length; i++) {
+            if ($(".checkboxAll")[0].checked == true)
+                $(".checkboxRow")[i].checked = true;
+            else
+                $(".checkboxRow")[i].checked = false;
+        }
+        //$(".checkboxRow").every(AddCheckbox);
+    })
+</script>

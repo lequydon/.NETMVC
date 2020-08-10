@@ -1,0 +1,85 @@
+﻿@model LiteCommerce.DomainModels.Customer
+@{
+}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Customer</h3>
+        <a class="btn btn-primary" href="~/Customer" style="float:right">Back</a>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" action="~/Customer/Input" method="post">
+        <input type="text" style="display:none" name="type" value="@ViewBag.Type" />
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">CustomerID</label>
+                @if (ViewBag.Type == "Edit")
+                {
+                    <input type="text" readonly class="form-control" value="@Model.CustomerID" name="CustomerID" id="exampleInputEmail1" placeholder="Enter CustomerID">
+                }
+                else
+                {
+                    <input type="text" class="form-control" value="@Model.CustomerID" name="CustomerID" id="exampleInputEmail1" placeholder="Enter CustomerID">
+                }
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Company name</label>
+                <input type="text" class="form-control" value="@Model.CompanyName" name="CompanyName" id="exampleInputEmail1" placeholder="Enter Company name">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Contact name</label>
+                    <input type="text" class="form-control" value="@Model.ContactName" name="ContactName" id="exampleInputPassword1" placeholder="Enter Contact name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Contact title</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" value="@Model.ContactTitle" name="ContactTitle" placeholder="Enter Contact title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Address</label>
+                <input type="text" class="form-control" value="@Model.Address" name="Address" id="exampleInputPassword1" placeholder=" Enter Address">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Country</label>
+                    <select class="form-control" name="Country">
+                        <option value="">--choose Country--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Country_List())
+                        {
+                            if (item.CountryName == Model.Country)
+                            {
+                                <option value="@item.CountryName" selected>@item.CountryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CountryName">@item.CountryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">City</label>
+                    <input type="text" class="form-control" value="@Model.City" name="City" id="exampleInputPassword1" placeholder="Enter City">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Phone</label>
+                    <input type="text" class="form-control" value="@Model.Phone" name="Phone" id="exampleInputPassword1" placeholder="Enter Phone">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Fax</label>
+                    <input type="text" class="form-control" value="@Model.Fax" name="Fax" id="exampleInputPassword1" placeholder="Enter  Fax">
+                </div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+            <a href="~/Customer" class="btn btn-danger">Cancel</a>
+        </div>
+    </form>
+</div>
+

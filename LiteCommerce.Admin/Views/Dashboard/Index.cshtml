@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.SmallTitle = "important";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Styles/Dashboard.css">
+<article style="width:100%">
+    <section id="dateFilter" style="padding: 0.4em">
+        <div class="date_picker_start picker">
+            <lable>From:</lable>
+            <input id="monthpicker_start" value="January 2018" title="monthpicker" />
+        </div>
+        <div class="date_picker_end picker">
+            <lable>To:</lable>
+            <input id="monthpicker_end" value="August 2018" title="monthpicker" />
+        </div>
+    </section>
+    <div class="clear_both"></div>
+    <div class="map" style="height:350px"></div>
+    <article class="dashboard">
+        <section class="donut_chart_class beauty_class">
+            <div class="pannel">MARKET SHARE</div>
+            <div class="lable" id="donut_market" style="margin-left: 1em">$0</div>
+            <div id="donut_chart_market" style="height: 7em;width: 100%"></div>
+        </section>
+        <section class="hum_log_class beauty_class customer_class">
+            <div class="pannel">CUSTOMERS</div>
+            <div class="lable" id="hum_log_customers">0</div>
+            <div id="hum-log-customers" style="height: 6em; width: 100%"></div>
+        </section>
+        <section class="hum_log_class beauty_class orders_class">
+            <div class="pannel">ORDERS</div>
+            <div class="lable" id="hum_log_orders">0</div>
+            <div id="hum-log-orders" style="height: 6em;width: 100%"></div>
+        </section>
+        <section class="hum_log_class beauty_class revenues_class">
+            <div class="pannel">REVENUE</div>
+            <div class="lable" id="hum_log_revenues">$0</div>
+            <div id="hum-log-revenues" style="height: 6em;width: 100%"></div>
+        </section>
+    </article>
+</article>
+<script src="~/Scripts/Dashboard.js"></script>
+

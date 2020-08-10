@@ -1,0 +1,10 @@
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DataLayers.dll
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DataLayers.pdb
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DomainModels.dll
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\LiteCommerce.DomainModels.pdb
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csprojAssemblyReference.cache
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.csproj.CopyComplete
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.dll
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\obj\Debug\LiteCommerce.DataLayers.pdb
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\System.Data.SqlClient.dll
+D:\.net mvc\LiteCommerce\LiteCommerce.DataLayers\bin\Debug\System.Data.SqlClient.xml

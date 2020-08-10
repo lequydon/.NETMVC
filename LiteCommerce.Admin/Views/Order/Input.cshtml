@@ -1,0 +1,131 @@
+﻿
+@model LiteCommerce.DomainModels.Order
+@{
+}
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Product</h3>
+        <a class="btn btn-primary" href="~/Order" style="float:right">Back</a>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form role="form" method="post" action="~/Order/Input">
+        <div class="box-body">
+            <div class="form-group">
+                <input type="text" style="display:none" name="OrderID" value="@Model.OrderID" />
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Customer</label>
+                    <select class="form-control" name="CustomerID">
+                        <option value="">--All Customer--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Customers_List(1, 100, "",""))
+                        {
+                            if (item.CustomerID == Model.CustomerID)
+                            {
+                                <option value="@item.CustomerID" selected>@item.CompanyName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CustomerID">@item.CompanyName</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Employee</label>
+                    <select class="form-control" name="EmployeeID">
+                        <option value="">--All Employee--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.HumanResourceBLL.Employee_List(1, 100, "",""))
+                        {
+                            if (item.EmployeeID == Model.EmployeeID)
+                            {
+                                <option value="@item.EmployeeID" selected>@item.FirstName @item.LastName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.EmployeeID">@item.FirstName @item.LastName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Shipper</label>
+                    <select class="form-control" name="ShipperID">
+                        <option value="">--All Shipper--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Shippers_List(""))
+                        {
+                            if (item.ShipperID == Model.ShipperID)
+                            {
+                                <option value="@item.ShipperID" selected>@item.CompanyName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.ShipperID">@item.CompanyName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Order Date</label>
+                    @Html.ValidationMessage("OrderDate", new { @style = "color:red" })
+                    <input type="date" class="form-control" name="OrderDate" value="@string.Format("{0:yyyy-MM-dd}", Model.OrderDate)" id="exampleInputPassword1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Required Date</label>
+                    @Html.ValidationMessage("RequiredDate", new { @style = "color:red" })
+                    <input type="date" class="form-control" value="@string.Format("{0:yyyy-MM-dd}", Model.RequiredDate)" name="RequiredDate" id="exampleInputPassword1">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="exampleInputPassword1">Shipped Date</label>
+                    @Html.ValidationMessage("ShippedDate", new { @style = "color:red" })
+                    <input type="date" class="form-control" value="@string.Format("{0:yyyy-MM-dd}", Model.ShippedDate)" name="ShippedDate" id="exampleInputPassword1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">	Ship Address</label>
+                <input type="text" class="form-control" name="ShipAddress" value="@Model.ShipAddress">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Country</label>
+                    <select class="form-control" name="ShipCountry">
+                        <option value="">--choose Ship country--</option>
+                        @foreach (var item in LiteCommerce.BusinessLayers.CatalogBLL.Country_List())
+                        {
+                            if (item.CountryName == Model.ShipCountry)
+                            {
+                                <option value="@item.CountryName" selected>@item.CountryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CountryName">@item.CountryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Ship City</label>
+                    <input type="text" class="form-control" value="@Model.ShipCity" name="ShipCity" id="exampleInputPassword1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Freight</label>
+                <input type="text" name="Freight" class="form-control" value="@Model.Freight">
+                @*<input type="text" class="form-control" name="Notes" value="@Model.Notes" id="exampleInputPassword1" placeholder="Enter Note">*@
+            </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+            @Html.ValidationMessage("")
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+            <a href="~/Order" class="btn btn-danger">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
